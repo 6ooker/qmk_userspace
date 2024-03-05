@@ -1,6 +1,6 @@
 {
     "userspace_version": "1.0",
     "build_targets": [
-        ["slate40", "default"]
+        ["handwired/slate40", "6ooker"]
     ]
 }
