@@ -2,6 +2,7 @@
     "userspace_version": "1.0",
     "build_targets": [
         ["handwired/slate40", "6ooker"],
-        ["handwired/padddle/rp2040", "dip"]
+        ["handwired/padddle/rp2040", "dip"],
+        ["keychron/v2/ansi_encoder", "6ooker"]
     ]
 }
