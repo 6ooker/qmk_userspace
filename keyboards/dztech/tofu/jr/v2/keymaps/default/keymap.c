@@ -427,38 +427,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
-
-    uint8_t layer = get_highest_layer(layer_state|default_layer_state);
-
-    for (uint8_t i = led_min; i < led_max; i++) {
-        switch(layer) {
-            case 2:
-
-                rgb_matrix_set_color(29, 0, 14, 85);
-                //rgb_matrix_sethsv(200, 255, 200);
-                break;
-            case 3:
-                if (get_highest_layer(layer_state) > 0) {
-                    for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
-                        for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
-                            uint8_t index = g_led_config.matrix_co[row][col];
-
-                            if (index >= led_min && index < led_max && index != NO_LED && keymap_key_to_keycode(layer, (keypos_t){col,row}) > KC_TRNS) {
-                                rgb_matrix_set_color(index, RGB_GREEN);
-                            }
-                        }
-                    }
-                }
-                break;
-            default:
-                break;
-        }
-    }
-    return false;
-}
-
-
 td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
