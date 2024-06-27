@@ -30,8 +30,8 @@ enum custom_keycodes {
 };
 
 enum layers{
-    PRIVATE,
     WIN_BASE,
+    PRIVATE,
     TYPING,
     FN
 };
