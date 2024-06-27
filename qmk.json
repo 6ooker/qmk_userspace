@@ -3,6 +3,7 @@
     "build_targets": [
         ["handwired/slate40", "6ooker"],
         ["handwired/padddle/rp2040", "dip"],
-        ["keychron/v2/ansi_encoder", "6ooker"]
+        ["keychron/v2/ansi_encoder", "6ooker"],
+        ["dztech/tofu/jr/v2", "default"]
     ]
 }
