@@ -18,7 +18,7 @@
 
 #ifdef RGB_MATRIX_ENABLE
 
-const is31fl3737_led_t PROGMEM g_is31fl3737_leds[IS31FL3737_LED_COUNT] = {
+const is31fl3737_led_t PROGMEM g_is31fl3737_leds[IS31FL3737_LED_COUNT] = { // Reihen von oben nach unten!
     { 1, SW11_CS12, SW10_CS12, SW12_CS12 },
     { 1, SW11_CS11, SW10_CS11, SW12_CS11 },
     { 1, SW11_CS10, SW10_CS10, SW12_CS10 },

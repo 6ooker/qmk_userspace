@@ -21,3 +21,9 @@
 #ifdef RGB_MATRIX_ENABLE
 #    define USB_SUSPEND_WAKEUP_DELAY 5000
 #endif
+
+#define MANUFACTURER "6ooker"
+
+#define PRODUCT "Tofu65 2.0"
+
+#define DEVICE_VER 0x0100
