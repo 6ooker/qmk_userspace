@@ -22,8 +22,17 @@
 #    define USB_SUSPEND_WAKEUP_DELAY 5000
 #endif
 
+#ifdef MANUFACTURER
+#    undef MANUFACTURER
+#endif
 #define MANUFACTURER "6ooker"
 
+#ifdef PRODUCT
+#    undef PRODUCT
+#endif
 #define PRODUCT "Tofu65 2.0"
 
+#ifdef DEVICE_VER
+#    undef DEVICE_VER
+#endif
 #define DEVICE_VER 0x0100
