@@ -1,1 +1,1 @@
-DEFAULT_FOLDER = handwired/fokey
+# intentionally left blank
