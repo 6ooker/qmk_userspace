@@ -1,7 +1,7 @@
 {
     "userspace_version": "1.1",
     "build_targets": [
-        ["handwired/padddle/rp2040", "dip"],
+        ["padddle/rp2040", "dip"],
         ["keychron/v2/ansi_encoder", "6ooker"],
         ["dztech/tofu/jr/v1", "default"],
         ["novelkeys/nk_classic_tkl", "via"]
