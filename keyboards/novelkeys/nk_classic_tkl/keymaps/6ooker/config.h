@@ -1,5 +1,6 @@
 #pragma once
 
+#undef PRODUCT
 #define PRODUCT "Classic-TKL"
 
 // RGB Matrix Animation modes. Explicitly enabled
