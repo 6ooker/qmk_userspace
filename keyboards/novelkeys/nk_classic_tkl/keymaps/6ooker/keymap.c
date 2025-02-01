@@ -54,7 +54,8 @@ const key_override_t ansi_slsh_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_SLS
 
 
 // This globally defines all key overrides to be used
-const key_override_t **key_overrides = (const key_override_t *[]){
+// CHANGED as described here: https://docs.qmk.fm/ChangeLog/20240825#key-override-keymap-c-signature-change-24120
+const key_override_t *key_overrides[] = {
     &ansi_one_ovrd,
     &ansi_two_ovrd,
     &ansi_three_ovrd,
@@ -76,7 +77,6 @@ const key_override_t **key_overrides = (const key_override_t *[]){
     &ansi_comm_ovrd,
     &ansi_dot_ovrd,
     &ansi_slsh_ovrd,
-    NULL // Null terminate the array!
 };
 
 
