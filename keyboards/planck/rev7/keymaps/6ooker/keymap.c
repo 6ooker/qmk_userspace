@@ -19,7 +19,7 @@
 
 enum planck_layers { _QWERTY, _LOWER, _RAISE, _ADJUST };
 
-enum planck_keycodes { PLOVER = SAFE_RANGE, BACKLIT, EXT_PLV };
+enum planck_keycodes { BACKLIT = SAFE_RANGE };
 
 typedef enum {
     TD_NONE,
@@ -50,6 +50,16 @@ td_state_t cur_dance(tap_dance_state_t *state);
 void win_finished(tap_dance_state_t *state, void *user_data);
 void win_reset(tap_dance_state_t *state, void *user_data);
 
+const key_override_t ansi_comm_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_COMM, DE_LABK, 1<<_QWERTY);
+const key_override_t ansi_dot_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_DOT, DE_RABK, 1<<_QWERTY);
+const key_override_t ansi_slsh_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_SLSH, DE_QUES, 1<<_QWERTY);
+
+const key_override_t *key_overrides[] = {
+    &ansi_comm_ovrd,
+    &ansi_dot_ovrd,
+    &ansi_slsh_ovrd,
+};
+
 #define LOWER MO(_LOWER)
 #define RAISE MO(_RAISE)
 
@@ -71,7 +81,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    DE_Y,    KC_U,    KC_I,    KC_O,    KC_P,    KC_BSPC,
     KC_ESC,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    DE_SCLN, DE_QUOT,
     KC_LSFT, DE_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, KC_ENT ,
-    BACKLIT, KC_LCTL, KC_LALT, TD(TD_LOS), LOWER, KC_RSFT, KC_SPC, RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
+    KC_LCTL, _______, TD(TD_LOS), KC_LALT, LOWER, KC_RSFT, KC_SPC, RAISE,   KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT
 ), // TODO: BACKLIT
 
 /* Lower
@@ -89,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     DE_TILD, DE_EXLM, DE_AT,   DE_HASH, DE_DLR,  DE_PERC, DE_CIRC, DE_AMPR,    DE_ASTR,    DE_LPRN, DE_RPRN, KC_BSPC,
     KC_DEL,  KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   DE_UNDS,    DE_PLUS,    DE_LCBR, DE_RCBR, DE_PIPE,
     _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  S(KC_NUHS), S(KC_NUBS), KC_HOME, KC_END,  _______,
-    _______, _______, _______, _______, _______, _______, _______, _______,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY
+    BACKLIT, _______, _______, _______, _______, _______, _______, _______,    KC_MNXT,    KC_VOLD, KC_VOLU, KC_MPLY
 ),
 
 /* Raise
