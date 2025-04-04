@@ -20,43 +20,7 @@
 #include "musical_notes.h"
 
 #undef E1M1_DOOM
-#define E1M1_DOOM  \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_D4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_C4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_BF3), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_B3 ), \
-    Q__NOTE(_C4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_D4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_C4 ), \
-    Q__NOTE(_E3 ), \
-    Q__NOTE(_E3 ), \
-    H__NOTE(_BF3),
+#define E1M1_DOOM Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_E4 ), Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_D4 ), Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_C4 ), Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_BF3), Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_B3 ), Q__NOTE(_C4 ), Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_E4 ), Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_D4 ), Q__NOTE(_E3 ), Q__NOTE(_E3 ), Q__NOTE(_C4 ), Q__NOTE(_E3 ), Q__NOTE(_E3 ), H__NOTE(_BF3),
 
 #undef OLD_SPICE
-#define OLD_SPICE  \
-    Q__NOTE(_A4 ), \
-    Q__NOTE(_A4 ), \
-    H__NOTE(_B4 ), \
-    H__NOTE(_D5 ), \
-    H__NOTE(_CS5), \
-    Q__NOTE(_E5 ), \
-    H__NOTE(_FS5), \
-    H__NOTE(_D5 ), \
+#define OLD_SPICE Q__NOTE(_A4 ), Q__NOTE(_A4 ), H__NOTE(_B4 ), H__NOTE(_D5 ), H__NOTE(_CS5), Q__NOTE(_E5 ), H__NOTE(_FS5), H__NOTE(_D5 )
