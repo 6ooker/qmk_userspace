@@ -1,0 +1,11 @@
+{
+    "userspace_version": "1.1",
+    "build_targets": [
+        ["padddle/rp2040", "dip"],
+        ["keychron/v2/ansi_encoder", "6ooker"],
+        ["novelkeys/nk_classic_tkl", "6ooker"],
+        ["dztech/tofu/jr/v1", "default"],
+        ["novelkeys/nk_classic_tkl", "via"],
+        ["planck/rev7", "6ooker"]
+    ]
+}
