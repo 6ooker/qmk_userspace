@@ -6,6 +6,7 @@
         ["novelkeys/nk_classic_tkl", "6ooker"],
         ["dztech/tofu/jr/v1", "default"],
         ["novelkeys/nk_classic_tkl", "via"],
-        ["planck/rev7", "6ooker"]
+        ["planck/rev7", "6ooker"],
+        ["planck/rev7", "music"]
     ]
 }

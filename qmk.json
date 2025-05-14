@@ -1,6 +1,6 @@
 {
     "userspace_version": "1.1",
     "build_targets": [
-        ["planck/rev7", "music"]
+        ["drop/cstm80", "keymap4sven"]
     ]
 }
