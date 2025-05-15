@@ -27,12 +27,14 @@ jobs:
           dir_names_exclude_current_dir: true
           files: keyboards/**
 
-      - name: List all changed files
+      - name: Get changed Keyboards
         env:
-          ALL_CHANGED: ${{ steps.changed-files.outputs.all_changed_files }}
+          CHANGES: ${{ steps.changed-files.outputs.all_changed_files }}
         run: |
-          for file in ${ALL_CHANGED}; do
-            echo "$file was changed"
+          KB=$(echo -e '${CHANGES}' | sed 's/ /\n/g')
+          for file in $KB; do
+            KM=$(echo "$KB" | grep -cv /keymaps/)
+            echo "${KB} and ${KM}"
           done
 
   build:
