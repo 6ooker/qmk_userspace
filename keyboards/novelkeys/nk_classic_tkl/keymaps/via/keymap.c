@@ -64,6 +64,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         }
         return false; // Skip all further processing of this key
     default:
-        return true; // Process all other keycodes normally
+        return true; // Process all other keycodes normally 
     }
 }

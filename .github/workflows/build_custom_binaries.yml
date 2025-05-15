@@ -28,14 +28,14 @@ jobs:
           files: keyboards/**
 
       - name: Get changed Keyboards
-        env:
-          CHANGES: ${{ steps.changed-files.outputs.all_changed_files }}
+        shell: 'bash {0}'
         run: |
-          KB=$(echo -e '${CHANGES}' | sed 's/ /\n/g')
-          for file in $KB; do
-            KM=$(echo "$KB" | grep -cv /keymaps/)
-            echo "${KB} and ${KM}"
+          CHANGES=$(echo -e '${{ steps.changed-files.outputs.all_changed_files }}' | sed 's/ /\n/g')
+          for file in $CHANGES; do
+            KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\// /')
+            echo "$KB"
           done
+          exit 0
 
   build:
     name: 'QMK Custom Userspace Build'

@@ -22,7 +22,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 bool dip_switch_update_user(uint8_t index, bool active) {
     switch (index)
     {
-    case 0:
+    case 0: 
         if(active) { layer_on(_WALK); } else { layer_off(_WALK); }
         break;
 
