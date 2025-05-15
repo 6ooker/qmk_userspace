@@ -23,6 +23,8 @@ jobs:
         uses: tj-actions/changed-files@ed68ef82c095e0d48ec87eccea555d944a631a4c
         with:
           exclude_submodules: true
+          dir_names: true
+          dir_names_exclude_current_dir: true
           files: keyboards/**
 
       - name: List all changed files
@@ -39,6 +41,7 @@ jobs:
     with:
       qmk_repo: 6ooker/qmk_firmware
       qmk_ref: my_builds
+    needs: changed-files
 
   publish:
     name: 'QMK Custom Userspace Publish'

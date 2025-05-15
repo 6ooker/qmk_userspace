@@ -263,6 +263,6 @@ void cpy_reset(tap_dance_state_t *state, void *user_data) {
 tap_dance_action_t tap_dance_actions[] = {
     // Tap once for OS, twice for Ctrl+Alt+Del, double-tap and hold for Win+L
     [TD_LOS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, win_finished, win_reset),
-    // Tap = Copy, Hold = Select All, DTap = Paste, DTap hold = Cut
+    // Tap = Copy, Hold = Select All, DTap = Paste, DTap hold = Cut 
     [TD_CPY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cpy_finished, cpy_reset),
 };

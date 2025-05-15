@@ -19,7 +19,6 @@
 #include "sendstring_german.h"
 
 // clang-format off
-
 enum custom_keycodes {
     CODE = SAFE_RANGE,
     CUST_DIA,
