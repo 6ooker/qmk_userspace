@@ -1,0 +1,24 @@
+name: Build Custom QMK Firmware
+
+on:
+  push:
+    branches-ignore:
+      - 'main'
+      - 'master'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: 'QMK Custom Userspace Build'
+    uses: ./.github/workflows/custom_userspace_build.yml
+    with:
+      qmk_repo: 6ooker/qmk_firmware
+      qmk_ref: my_builds
+
+  publish:
+    name: 'QMK Custom Userspace Publish'
+    uses: ./.github/workflows/custom_userspace_publish.yml
+    if: always() && !cancelled()
+    needs: build
