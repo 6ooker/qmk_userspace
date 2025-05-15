@@ -32,7 +32,7 @@ jobs:
         run: |
           CHANGES=$(echo -e '${{ steps.changed-files.outputs.all_changed_files }}' | sed 's/ /\n/g')
           for file in $CHANGES; do
-            KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\// /')
+            KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\/\(.*\)$/ /')
             echo "$KB"
           done
           exit 0

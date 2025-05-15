@@ -21,7 +21,7 @@
 enum my_keycodes {
   RETRO_RGB = QK_USER_0
 };
-
+ 
 enum layers{
     BASE,
     FN

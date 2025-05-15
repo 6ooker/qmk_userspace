@@ -24,7 +24,7 @@ enum custom_keycodes {
     CUST_DIA,
     CUST_MULT,
     CUST_DIV,
-    CUST_CURRENCY, 
+    CUST_CURRENCY,
     CUST_UACC,
 };
 
