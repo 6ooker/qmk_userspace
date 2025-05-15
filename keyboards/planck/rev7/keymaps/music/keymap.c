@@ -17,6 +17,7 @@
 #include QMK_KEYBOARD_H
 #include "keymap_german.h"
 
+
 enum planck_layers { _QWERTY, _LOWER, _RAISE, _ADJUST, _SETTINGS };
 
 typedef enum {
