@@ -33,7 +33,8 @@ jobs:
           CHANGES=$(echo -e '${{ steps.changed-files.outputs.all_changed_files }}' | sed 's/ /\n/g')
           for file in $CHANGES; do
             KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\/\(.*\)$/ /')
-            echo "$KB"
+            KM=$(echo "$file" | sed 's/.*\///')
+            echo "$KB and $KM"
           done
           exit 0
 
