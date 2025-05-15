@@ -28,13 +28,18 @@ jobs:
           files: keyboards/**
 
       - name: Get changed Keyboards
+        id: change-summary
         shell: 'bash {0}'
         run: |
           CHANGES=$(echo -e '${{ steps.changed-files.outputs.all_changed_files }}' | sed 's/ /\n/g')
           for file in $CHANGES; do
-            KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\/\(.*\)$/ /')
+            KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\/\(.*\)$//')
             KM=$(echo "$file" | sed 's/.*\///')
-            echo "$KB and $KM"
+            {
+              echo 'KEEBS<<EOF'
+              $KB
+              echo EOF
+            } >> "$GITHUB_OUTPUT"
           done
           exit 0
 
@@ -50,4 +55,6 @@ jobs:
     name: 'QMK Custom Userspace Publish'
     uses: ./.github/workflows/custom_userspace_publish.yml
     if: always() && !cancelled()
+    with:
+      release_body: 
     needs: build

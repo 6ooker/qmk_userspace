@@ -3,9 +3,19 @@ name: Publish Custom Binaries
 on:
   workflow_call:
     inputs:
+      release_tag:
+        description: "allow setting the release tag"
+        default: "latest"
+        required: false
+        type: string
       release_name:
         description: "allow setting the release name"
-        default: "latest"
+        default: "Latest QMK Firmware"
+        required: false
+        type: string
+      release_body:
+        description: "allow setting the release body"
+        default: ""
         required: false
         type: string
 
@@ -30,11 +40,12 @@ jobs:
         if: always() && !cancelled()
         with:
           token: ${{ github.token }}
-          name: Latest QMK Firmware
-          tag_name: ${{ inputs.release_name || 'latest' }}
+          name: ${{ inputs.release_name || 'Latest QMK Firmware' }}
+          tag_name: ${{ inputs.release_tag || 'latest' }}
           fail_on_unmatched_files: false
           draft: false
           prerelease: false
+          body: ${{ inputs.release_body || '' }}
           files: |
             **/*.hex
             **/*.bin
