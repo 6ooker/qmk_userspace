@@ -32,14 +32,11 @@ jobs:
         shell: 'bash {0}'
         run: |
           CHANGES=$(echo -e '${{ steps.changed-files.outputs.all_changed_files }}' | sed 's/ /\n/g')
+          echo "## Keyboards and Keymaps changed" >> $GITHUB_STEP_SUMMARY
           for file in $CHANGES; do
             KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\/\(.*\)$//')
             KM=$(echo "$file" | sed 's/.*\///')
-            {
-              echo 'KEEBS<<EOF'
-              $KB
-              echo EOF
-            } >> "$GITHUB_OUTPUT"
+            echo "- $KB / $KM" >> $GITHUB_STEP_SUMMARY
           done
           exit 0
 

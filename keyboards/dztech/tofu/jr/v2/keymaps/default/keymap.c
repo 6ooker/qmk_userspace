@@ -25,7 +25,7 @@ enum custom_keycodes {
     CUST_MULT,
     CUST_DIV,
     CUST_CURRENCY,
-    CUST_UACC, 
+    CUST_UACC,
 };
 
 enum layers{
