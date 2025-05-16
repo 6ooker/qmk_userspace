@@ -36,7 +36,7 @@ jobs:
           for file in $CHANGES; do
             KB=$(echo "$file" | sed -e 's/keyboards\///; s/\/keymaps\/\(.*\)$//')
             KM=$(echo "$file" | sed 's/.*\///')
-            echo "- $KB / $KM" >> $GITHUB_STEP_SUMMARY
+            echo "- $KB --> $KM" >> $GITHUB_STEP_SUMMARY
           done
           exit 0
 
