@@ -12,11 +12,11 @@ enum layer_names {
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [_DEFAULT] = LAYOUT_ortho_1x1(LSFT(KC_W)),
-    [_WALK] = LAYOUT_ortho_1x1(KC_W),
+    [_DEFAULT] = LAYOUT_ortho_1x1(KC_RALT),
+    [_WALK] = LAYOUT_ortho_1x1(KC_LCTL),
     [_DODGE] = LAYOUT_ortho_1x1(KC_LSFT),
     [_JUMP] = LAYOUT_ortho_1x1(KC_SPC),
-    [_SPECIAL] = LAYOUT_ortho_1x1(KC_F20)
+    [_SPECIAL] = LAYOUT_ortho_1x1(KC_F13)
 };
 
 bool dip_switch_update_user(uint8_t index, bool active) {
