@@ -246,6 +246,29 @@ combo_t key_combos[] = {
     COMBO(umlaut_combo_o, DE_ODIA),
 };
 
+
+// Caps Word Workaround for German layout
+bool caps_word_press_user(uint16_t keycode) {
+    switch (keycode) {
+        // Keycodes that continue, WITH shift applied
+        case KC_A ... KC_Z:
+        case DE_MINS:
+            add_weak_mods(MOD_BIT(KC_LSFT)); // Apply shift to next key
+            return true;
+
+        // Keycodes that continue, WOITHOUT shifting
+        case DE_1 ... DE_0:
+        case KC_BSPC:
+        case KC_DEL:
+        case DE_UNDS:
+            return true;
+
+        default:
+            return false; // Deactivate Caps Word
+    }
+}
+
+
 td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
         if (state->interrupted || !state->pressed) return TD_SINGLE_TAP;
