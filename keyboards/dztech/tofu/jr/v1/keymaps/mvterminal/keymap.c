@@ -83,8 +83,8 @@ void leader_end_user(void) {
     } else if (leader_sequence_one_key(KC_M)) {
         // Leader, m
         SEND_STRING("erik.katzenberger@exclusive-networks.de");
-    } else if (leader_sequence_four_keys(KC_UP, KC_UP, KC_DOWN, KC_RGHT)) {
-        // Leader up, up, down, right
+    } else if (leader_sequence_four_keys(KC_DOWN, KC_DOWN, KC_UP, KC_RGHT)) {
+        // Leader down, down, up, right
         SEND_STRING("For Super-Earth!!!");
     }
 }
