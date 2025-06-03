@@ -520,6 +520,11 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
 
+    // Mark Leaderkey
+    if (leader_sequence_active()) {
+        rgb_matrix_set_color(30, 0xFF, 0xFF, 0xFF);
+    }
+
     return false;
 }
 
