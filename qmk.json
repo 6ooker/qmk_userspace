@@ -1,8 +1,6 @@
 {
     "userspace_version": "1.1",
     "build_targets": [
-        ["drop/cstm80", "keymap4sven"],
-        ["padddle/rp2040", "dip"],
         ["dztech/tofu/jr/v1", "mvterminal"]
     ]
 }
