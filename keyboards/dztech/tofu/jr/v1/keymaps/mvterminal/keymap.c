@@ -18,6 +18,8 @@
 #include "keymap_german.h"
 #include "sendstring_german.h"
 
+#define CAPSINDICATOR 30
+
 // clang-format off
 
 enum custom_keycodes {
@@ -404,6 +406,15 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
+const uint16_t PROGMEM umlaut_combo_a[] = {KC_A, KC_E, COMBO_END};
+const uint16_t PROGMEM umlaut_combo_u[] = {KC_U, KC_E, COMBO_END};
+const uint16_t PROGMEM umlaut_combo_o[] = {KC_O, KC_E, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(umlaut_combo_a, DE_ADIA),
+    COMBO(umlaut_combo_u, DE_UDIA),
+    COMBO(umlaut_combo_o, DE_ODIA),
+};
 
 td_state_t cur_dance(tap_dance_state_t *state) {
     if (state->count == 1) {
@@ -522,7 +533,7 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     // Mark Leaderkey
     if (leader_sequence_active()) {
-        rgb_matrix_set_color(30, 0xFF, 0xFF, 0xFF);
+        rgb_matrix_set_color(CAPSINDICATOR, RGB_GOLD);
     }
 
     return false;

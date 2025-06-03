@@ -52,3 +52,5 @@
 #    undef DEVICE_VER
 #endif
 #define DEVICE_VER 0x0100
+
+#define EXTRA_SHORT_COMBOS
