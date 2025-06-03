@@ -30,10 +30,10 @@ enum custom_keycodes {
 };
 
 enum layers{
-    WIN_BASE,
-    PRIVATE,
-    TYPING,
-    FN
+    TY_BASE,
+    TZ_BASE,
+    FN,
+    RGB
 };
 
 typedef enum {
@@ -57,6 +57,7 @@ typedef struct {
 enum {
     TD_LOS, // OS/UNLOCK/LOCK
     TD_GES, // GRV,TILD/ESC
+    TD_CPY, // Copy/Paste/Cut
 };
 
 td_state_t cur_dance(tap_dance_state_t *state);
@@ -64,8 +65,14 @@ td_state_t cur_dance(tap_dance_state_t *state);
 // For the Win tap dance. Put it here so it can be used in any keymap
 void win_finished(tap_dance_state_t *state, void *user_data);
 void win_reset(tap_dance_state_t *state, void *user_data);
+// Same for Copy-Paste
+void cpy_finished(tap_dance_state_t *state, void *user_data);
+void cpy_reset(tap_dance_state_t *state, void *user_data);
 
-
+// Layer defines
+#define TY PDF(TY_BASE)
+#define TZ PDF(TZ_BASE)
+#define CONF MO(RGB)
 
 void leader_start_user(void) {
     // Do smthing when the leader key is pressed
@@ -315,44 +322,29 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 };
 
 
-const key_override_t ansi_one_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_1, DE_EXLM, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_two_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_2, DE_AT, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_three_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_3, DE_HASH, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_four_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_4, DE_DLR, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_five_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_5, DE_PERC, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_six_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_6, DE_CIRC, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_seven_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_7, DE_AMPR, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_eight_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_8, DE_ASTR, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_nine_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_9, DE_LPRN, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_zero_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_0, DE_RPRN, 1<<WIN_BASE|1<<PRIVATE);
-//const key_override_t ansi_grv_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_GRV, DE_TILD, 1<<WIN_BASE|1<<PRIVATE); // old, no override for tapdance
-const key_override_t ansi_grv_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, TD(TD_GES), DE_TILD, 1<<WIN_BASE|1<<PRIVATE); // Override to correctly work with tapdance
-const key_override_t ansi_mins_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_MINS, DE_UNDS, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_eql_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_EQL, DE_PLUS, 1<<WIN_BASE|1<<PRIVATE);
+const key_override_t ansi_one_ovrd   = ko_make_with_layers(MOD_MASK_SHIFT, KC_1, DE_EXLM, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_two_ovrd   = ko_make_with_layers(MOD_MASK_SHIFT, KC_2, DE_AT, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_three_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_3, DE_HASH, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_four_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, KC_4, DE_DLR, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_five_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, KC_5, DE_PERC, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_six_ovrd   = ko_make_with_layers(MOD_MASK_SHIFT, KC_6, DE_CIRC, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_seven_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_7, DE_AMPR, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_eight_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, KC_8, DE_ASTR, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_nine_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, KC_9, DE_LPRN, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_zero_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, KC_0, DE_RPRN, 1<<TY_BASE|1<<TZ_BASE);
+//const key_override_t ansi_grv_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_GRV, DE_TILD, 1<<TY_BASE|1<<TZ_BASE); // old, no override for tapdance
+const key_override_t ansi_grv_ovrd   = ko_make_with_layers(MOD_MASK_SHIFT, TD(TD_GES), DE_TILD, 1<<TY_BASE|1<<TZ_BASE); // Override to correctly work with tapdance
+const key_override_t ansi_mins_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_MINS, DE_UNDS, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_eql_ovrd   = ko_make_with_layers(MOD_MASK_SHIFT, DE_EQL, DE_PLUS, 1<<TY_BASE|1<<TZ_BASE);
 
-const key_override_t ansi_lbrc_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_LBRC, DE_LCBR, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_rbrc_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_RBRC, DE_RCBR, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_bsls_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_BSLS, DE_PIPE, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_scln_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_SCLN, DE_COLN, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_quot_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_QUOT, DE_DQUO, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_comm_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_COMM, DE_LABK, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_dot_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_DOT, DE_RABK, 1<<WIN_BASE|1<<PRIVATE);
-const key_override_t ansi_slsh_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_SLSH, DE_QUES, 1<<WIN_BASE|1<<PRIVATE);
-
-const key_override_t type_comm_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_COMM, DE_QUES, 1<<TYPING);
-const key_override_t type_dot_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_DOT, DE_COLN, 1<<TYPING);
-const key_override_t type_mins_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_MINS, DE_UNDS, 1<<TYPING);
-const key_override_t type_dlr_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_DLR, DE_DQUO, 1<<TYPING);
-const key_override_t type_ss_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_SS, DE_EXLM, 1<<TYPING);
-const key_override_t type_dlr_alt_ovrd = ko_make_with_layers(MOD_MASK_ALT, DE_DLR, DE_UDIA, 1<<TYPING);
-const key_override_t type_ss_alt_ovrd = ko_make_with_layers(MOD_MASK_ALT, DE_SS, DE_SECT, 1<<TYPING);
-const key_override_t type_scln_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_SCLN, DE_DEG, 1<<TYPING);
-const key_override_t type_slsh_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_SLSH, CUST_UACC, 1<<TYPING);
-const key_override_t type_lprn_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_LPRN, DE_RPRN, 1<<TYPING);
-const key_override_t type_quot_ovrd = ko_make_with_layers(MOD_MASK_SHIFT, DE_QUOT, CUST_DIA, 1<<TYPING);
-const key_override_t type_slsh_alt_ovrd = ko_make_with_layers(MOD_MASK_ALT, DE_SLSH, CUST_DIV, 1<<TYPING);
-const key_override_t type_lprn_alt_ovrd = ko_make_with_layers(MOD_MASK_ALT, DE_LPRN, CUST_MULT, 1<<TYPING);
-const key_override_t type_quot_alt_ovrd = ko_make_with_layers(MOD_MASK_ALT, DE_QUOT, CUST_CURRENCY, 1<<TYPING);
+const key_override_t ansi_lbrc_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_LBRC, DE_LCBR, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_rbrc_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_RBRC, DE_RCBR, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_bsls_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_BSLS, DE_PIPE, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_scln_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_SCLN, DE_COLN, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_quot_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_QUOT, DE_DQUO, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_comm_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_COMM, DE_LABK, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_dot_ovrd   = ko_make_with_layers(MOD_MASK_SHIFT, DE_DOT, DE_RABK, 1<<TY_BASE|1<<TZ_BASE);
+const key_override_t ansi_slsh_ovrd  = ko_make_with_layers(MOD_MASK_SHIFT, DE_SLSH, DE_QUES, 1<<TY_BASE|1<<TZ_BASE);
 
 // This globally defines all key overrides to be used
 // CHANGED as described here: https://docs.qmk.fm/ChangeLog/20240825#key-override-keymap-c-signature-change-24120
@@ -378,38 +370,23 @@ const key_override_t *key_overrides[] = {
     &ansi_comm_ovrd,
     &ansi_dot_ovrd,
     &ansi_slsh_ovrd,
-
-    &type_comm_ovrd,
-    &type_dot_ovrd,
-    &type_mins_ovrd,
-    &type_dlr_ovrd,
-    &type_ss_ovrd,
-    &type_dlr_alt_ovrd,
-    &type_ss_alt_ovrd,
-    &type_scln_ovrd,
-    &type_slsh_ovrd,
-    &type_lprn_ovrd,
-    &type_quot_ovrd,
-    &type_slsh_alt_ovrd,
-    &type_lprn_alt_ovrd,
-    &type_quot_alt_ovrd,
 };
 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-    [WIN_BASE] = LAYOUT_65_ansi(
+    [TY_BASE] = LAYOUT_65_ansi(
         TD(TD_GES),KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    DE_MINS, DE_EQL,  KC_BSPC, KC_DEL,
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    DE_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_LBRC, DE_RBRC, DE_BSLS, KC_PGUP,
         QK_LEAD,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    DE_SCLN, DE_QUOT,          KC_ENT,  KC_PGDN,
-        KC_LSFT,  DE_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, KC_RSFT,          KC_UP,   KC_END,
-        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, MO(FN),  CODE,             KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LSFT,  DE_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, CODE,             KC_UP,   TD(TD_CPY),
+        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, MO(FN),  CONF,             KC_LEFT, KC_DOWN, KC_RGHT
     ),
-    [PRIVATE] = LAYOUT_65_ansi(
-        QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_HOME,
-        _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, KC_PSCR, KC_SCRL, KC_PAUS, QK_BOOT, KC_PGUP,
-        KC_CAPS, RGB_SPI, RGB_SPD, _______, _______, _______, _______, _______, _______, _______, _______, _______,         EE_CLR,  KC_PGDN,
-        KC_LSFT, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______, _______,          KC_VOLU, KC_MUTE,
-        _______, _______, _______,                            _______,          _______, _______, _______,          KC_MPRV, KC_VOLD, KC_MNXT
+    [TZ_BASE] = LAYOUT_65_ansi(
+        TD(TD_GES),KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    DE_MINS, DE_EQL,  KC_BSPC, KC_DEL,
+        KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    DE_Z,    KC_U,    KC_I,    KC_O,    KC_P,    DE_LBRC, DE_RBRC, DE_BSLS, KC_PGUP,
+        QK_LEAD,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    DE_SCLN, DE_QUOT,          KC_ENT,  KC_PGDN,
+        KC_LSFT,  DE_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, CODE,             KC_UP,   TD(TD_CPY),
+        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, MO(FN),  CONF,             KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [FN] = LAYOUT_65_ansi(
         _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, RGB_TOG,
@@ -418,12 +395,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
         _______, _______, _______,                            _______,          _______, _______, _______,          _______, _______, _______
     ),
-    [TYPING] = LAYOUT_65_ansi(
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
-        _______, _______, _______,                            _______,          _______, _______, _______,          _______, _______, _______
+    [RGB] = LAYOUT_65_ansi(
+        QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_HOME,
+        _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, KC_PSCR, KC_SCRL, KC_PAUS, QK_BOOT, KC_PGUP,
+        KC_CAPS, RGB_SPI, RGB_SPD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          EE_CLR,  KC_PGDN,
+        KC_LSFT, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______, _______,          KC_VOLU, KC_MUTE,
+        _______, _______, _______,                            _______,          _______, _______, _______,          KC_MPRV, KC_VOLD, KC_MNXT
     )
 };
 
@@ -453,6 +430,11 @@ td_state_t cur_dance(tap_dance_state_t *state) {
 
 // Create an instance of 'td_tap_t' for the 'win' tap dance.
 static td_tap_t wintap_state = {
+    .is_press_action = true,
+    .state = TD_NONE
+};
+// Same for Copy-paste
+static td_tap_t cpytap_state = {
     .is_press_action = true,
     .state = TD_NONE
 };
@@ -486,11 +468,37 @@ void win_reset(tap_dance_state_t *state, void *user_data) {
     wintap_state.state = TD_NONE;
 }
 
+void cpy_finished(tap_dance_state_t *state, void *user_data) {
+    cpytap_state.state = cur_dance(state);
+    switch (cpytap_state.state)
+    {
+    case TD_SINGLE_TAP: register_code16(C(KC_C)); break;
+    case TD_SINGLE_HOLD: register_code16(C(KC_A)); break;
+    case TD_DOUBLE_TAP: register_code16(C(KC_V)); break;
+    case TD_DOUBLE_HOLD: register_code16(C(KC_X)); break;
+    case TD_DOUBLE_SINGLE_TAP: tap_code16(C(KC_C)); register_code16(C(KC_C)); break;
+    default: break;
+    }
+}
+
+void cpy_reset(tap_dance_state_t *state, void *user_data) {
+    switch (cpytap_state.state)
+    {
+    case TD_SINGLE_TAP: unregister_code16(C(KC_C)); break;
+    case TD_SINGLE_HOLD: unregister_code16(C(KC_A)); break;
+    case TD_DOUBLE_TAP: unregister_code16(C(KC_V)); break;
+    case TD_DOUBLE_HOLD: unregister_code16(C(KC_X)); break;
+    case TD_DOUBLE_SINGLE_TAP: unregister_code16(C(KC_C)); break;
+    default: break;
+    }
+    cpytap_state.state = TD_NONE;
+}
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
 
     uint8_t layer = get_highest_layer(layer_state|default_layer_state);
 
+    // Layer indicator only with keycodes
     if (layer > 0) {
         for (uint8_t row = 0; row < MATRIX_ROWS; ++row) {
             for (uint8_t col = 0; col < MATRIX_COLS; ++col) {
@@ -502,6 +510,16 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
             }
         }
     }
+
+    // Caps Lock Indicator on alphas
+    if (host_keyboard_led_state().caps_lock) {
+        for (uint8_t i = led_min; i < led_max; i++) {
+            if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+                rgb_matrix_set_color(i, RGB_RED);
+            }
+        }
+    }
+
     return false;
 }
 
@@ -519,4 +537,6 @@ tap_dance_action_t tap_dance_actions[] = {
     [TD_LOS] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, win_finished, win_reset),
     // Tap once for Grave/Tilde, double-tap for ESC
     [TD_GES] = ACTION_TAP_DANCE_DOUBLE(DE_GRV, KC_ESC),
+    // Tap = Copy, Hold = Select All, DTap = Paste, DTap hold = Cut
+    [TD_CPY] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, cpy_finished, cpy_reset),
 };
