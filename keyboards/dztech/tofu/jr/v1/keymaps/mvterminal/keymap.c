@@ -24,11 +24,6 @@
 
 enum custom_keycodes {
     CODE = SAFE_RANGE,
-    CUST_DIA,
-    CUST_MULT,
-    CUST_DIV,
-    CUST_CURRENCY,
-    CUST_UACC,
 };
 
 enum layers{
@@ -75,6 +70,7 @@ void cpy_reset(tap_dance_state_t *state, void *user_data);
 #define TY PDF(TY_BASE)
 #define TZ PDF(TZ_BASE)
 #define CONF MO(MISC)
+#define FUN MO(FN)
 
 void leader_start_user(void) {
     // Do smthing when the leader key is pressed
@@ -142,7 +138,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 break;
             }
 
-        case KC_W:
+        case KC_P:
             {
                 if (record->event.pressed) {
                     if (code_is_held) {
@@ -153,172 +149,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 }
                 return true;
             }
-
-        case KC_Q:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("\\");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_E:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        register_code16(DE_EURO);
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_X:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("#");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_C:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("&");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_V:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("@");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_B:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("{");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_N:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("}");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_F:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("[");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_G:
-            {
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        clear_mods();
-                        SEND_STRING("]");
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_U:
-            {
-                static bool udia_registered;
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        register_code(DE_UDIA);
-                        udia_registered = true;
-                        return false;
-                    }
-                } else {
-                    if (udia_registered) {
-                        unregister_code(DE_UDIA);
-                        udia_registered = false;
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_A:
-            {
-                static bool adia_registered;
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        register_code(DE_ADIA);
-                        adia_registered = true;
-                        return false;
-                    }
-                } else {
-                    if (adia_registered) {
-                        unregister_code(DE_ADIA);
-                        adia_registered = false;
-                        return false;
-                    }
-                }
-                return true;
-            }
-
-        case KC_O:
-            {
-                static bool odia_registered;
-                if (record->event.pressed) {
-                    if (code_is_held) {
-                        register_code(DE_ODIA);
-                        odia_registered = true;
-                        return false;
-                    }
-                } else {
-                    if (odia_registered) {
-                        unregister_code(DE_ODIA);
-                        odia_registered = false;
-                        return false;
-                    }
-                }
-                return true;
-            }
-
     }
     return true;
 };
@@ -381,24 +211,24 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    DE_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_LBRC, DE_RBRC, DE_BSLS, KC_PGUP,
         QK_LEAD,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    DE_SCLN, DE_QUOT,          KC_ENT,  KC_PGDN,
         KC_LSFT,  DE_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, CODE,             KC_UP,   TD(TD_CPY),
-        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, MO(FN),  CONF,             KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, FUN,     CONF,             KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [TZ_BASE] = LAYOUT_65_ansi(
         TD(TD_GES),KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    DE_MINS, DE_EQL,  KC_BSPC, KC_DEL,
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    DE_Z,    KC_U,    KC_I,    KC_O,    KC_P,    DE_LBRC, DE_RBRC, DE_BSLS, KC_PGUP,
         QK_LEAD,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    DE_SCLN, DE_QUOT,          KC_ENT,  KC_PGDN,
         KC_LSFT,  DE_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, CODE,             KC_UP,   TD(TD_CPY),
-        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, MO(FN),  CONF,             KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, FUN,     CONF,             KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [FN] = LAYOUT_65_ansi(
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, RGB_TOG,
+        QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, RGB_TOG,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
         _______, _______, _______,                            _______,          _______, _______, _______,          _______, _______, _______
     ),
     [MISC] = LAYOUT_65_ansi(
-        QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_HOME,
+        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_HOME,
         _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, KC_PSCR, KC_SCRL, KC_PAUS, QK_BOOT, KC_PGUP,
         KC_CAPS, RGB_SPI, RGB_SPD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          EE_CLR,  KC_PGDN,
         KC_LSFT, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______, _______,          KC_VOLU, KC_MUTE,
@@ -531,9 +361,14 @@ bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
         }
     }
 
+    // Caps Word Indicator
+    if (is_caps_word_on()) {
+        rgb_matrix_set_color(CAPSINDICATOR, RGB_RED);
+    }
+
     // Mark Leaderkey
     if (leader_sequence_active()) {
-        rgb_matrix_set_color(CAPSINDICATOR, RGB_GOLD);
+        rgb_matrix_set_color(CAPSINDICATOR, RGB_YELLOW);
     }
 
     return false;
