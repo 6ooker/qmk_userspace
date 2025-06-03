@@ -77,24 +77,15 @@ void leader_start_user(void) {
 }
 
 void leader_end_user(void) {
-    if (leader_sequence_two_keys(KC_U, KC_D)) {
-        // Leader, u, d
-        SEND_STRING("sudo apt update\n");
-    } else if (leader_sequence_two_keys(KC_U, KC_G)) {
-        // Leader, u, g
-        SEND_STRING("sudo apt upgrade -y\n");
-    } else if (leader_sequence_two_keys(KC_I, KC_I)) {
-        // Leader, i, i
-        SEND_STRING("if () {}" SS_TAP(X_LEFT) SS_TAP(X_ENT));
-    } else if (leader_sequence_two_keys(KC_I, KC_F)) {
-        // Leader, i, f
-        SEND_STRING("for () {}" SS_TAP(X_LEFT) SS_TAP(X_ENT));
-    } else if (leader_sequence_two_keys(KC_I, KC_W)) {
-        // Leader, i, w
-        SEND_STRING("while () {}" SS_TAP(X_LEFT) SS_TAP(X_ENT));
+    if (leader_sequence_two_keys(KC_S, KC_S)) {
+        // Leader, s, s
+        tap_code(DE_SS);
     } else if (leader_sequence_one_key(KC_M)) {
         // Leader, m
         SEND_STRING("erik.katzenberger@exclusive-networks.de");
+    } else if (leader_sequence_four_keys(KC_UP, KC_UP, KC_DOWN, KC_RGHT)) {
+        // Leader up, up, down, right
+        SEND_STRING("For Super-Earth!!!");
     }
 }
 
@@ -224,8 +215,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
         QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, RGB_TOG,
         _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
         KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
-        _______, _______, _______,                            _______,          _______, _______, _______,          _______, _______, _______
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_VOLU, _______,
+        _______, _______, _______,                            _______,          _______, _______, _______,          _______, KC_VOLD, _______
     ),
     [MISC] = LAYOUT_65_ansi(
         _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_HOME,
