@@ -19,6 +19,10 @@
 #include "sendstring_german.h"
 
 #define CAPSINDICATOR 30
+#define TY PDF(TY_BASE)
+#define TZ PDF(TZ_BASE)
+#define CONF OSL(MISC)
+#define FUN MO(FN)
 
 // clang-format off
 
@@ -57,6 +61,8 @@ enum {
     TD_CPY, // Copy/Paste/Cut
 };
 
+// clang-format on
+
 td_state_t cur_dance(tap_dance_state_t *state);
 
 // For the Win tap dance. Put it here so it can be used in any keymap
@@ -66,29 +72,33 @@ void win_reset(tap_dance_state_t *state, void *user_data);
 void cpy_finished(tap_dance_state_t *state, void *user_data);
 void cpy_reset(tap_dance_state_t *state, void *user_data);
 
-// Layer defines
-#define TY PDF(TY_BASE)
-#define TZ PDF(TZ_BASE)
-#define CONF MO(MISC)
-#define FUN MO(FN)
 
 void leader_start_user(void) {
     // Do smthing when the leader key is pressed
 }
 
 void leader_end_user(void) {
-    if (leader_sequence_two_keys(KC_S, KC_S)) {
-        // Leader, s, s
-        tap_code(DE_SS);
-    } else if (leader_sequence_one_key(KC_M)) {
+    if (leader_sequence_one_key(KC_M)) {
         // Leader, m
         SEND_STRING("erik.katzenberger@exclusive-networks.de");
+    } else if (leader_sequence_one_key(KC_P)) {
+        // Leader, p
+        SEND_STRING("katzenberger.erik@");
+    } else if (leader_sequence_two_keys(KC_S, KC_S)) {
+        // Leader, s, s
+        tap_code(DE_SS);
+    } else if (leader_sequence_two_keys(KC_D, KC_D)) {
+        // Leader, d, d
+        tap_code16(KC_END);
+        tap_code16(S(KC_HOME));
+        tap_code16(KC_BSPC);
     } else if (leader_sequence_four_keys(KC_DOWN, KC_DOWN, KC_UP, KC_RGHT)) {
         // Leader down, down, up, right
         SEND_STRING("For Super-Earth!!!");
     }
 }
 
+// Custom Keycode handling
 uint8_t mod_state;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     // Store the current modifier state in the variable for later reference
@@ -195,35 +205,35 @@ const key_override_t *key_overrides[] = {
     &ansi_slsh_ovrd,
 };
 
-
+// clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [TY_BASE] = LAYOUT_65_ansi(
         TD(TD_GES),KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    DE_MINS, DE_EQL,  KC_BSPC, KC_DEL,
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    DE_Y,    KC_U,    KC_I,    KC_O,    KC_P,    DE_LBRC, DE_RBRC, DE_BSLS, KC_PGUP,
         QK_LEAD,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    DE_SCLN, DE_QUOT,          KC_ENT,  KC_PGDN,
         KC_LSFT,  DE_Z,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, CODE,             KC_UP,   TD(TD_CPY),
-        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, FUN,     CONF,             KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, KC_MYCM, FUN,              KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [TZ_BASE] = LAYOUT_65_ansi(
         TD(TD_GES),KC_1,   KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    DE_MINS, DE_EQL,  KC_BSPC, KC_DEL,
         KC_TAB,   KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    DE_Z,    KC_U,    KC_I,    KC_O,    KC_P,    DE_LBRC, DE_RBRC, DE_BSLS, KC_PGUP,
         QK_LEAD,  KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    KC_H,    KC_J,    KC_K,    KC_L,    DE_SCLN, DE_QUOT,          KC_ENT,  KC_PGDN,
         KC_LSFT,  DE_Y,    KC_X,    KC_C,    KC_V,    KC_B,    KC_N,    KC_M,    DE_COMM, DE_DOT,  DE_SLSH, CODE,             KC_UP,   TD(TD_CPY),
-        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, FUN,     CONF,             KC_LEFT, KC_DOWN, KC_RGHT
+        KC_LCTL, TD(TD_LOS),KC_LALT,                           KC_SPC,           KC_RALT, KC_MYCM, FUN,              KC_LEFT, KC_DOWN, KC_RGHT
     ),
     [FN] = LAYOUT_65_ansi(
-        QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, RGB_TOG,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,
-        KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
-        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_VOLU, _______,
-        _______, _______, _______,                            _______,          _______, _______, _______,          _______, KC_VOLD, _______
+        QK_GESC, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  _______, _______,
+        KC_HOME, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLU,
+        KC_CAPS, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          KC_MUTE, KC_VOLD,
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
+        _______, _______, _______,                            _______,          _______, CONF,    _______,          KC_MPRV, _______, KC_MNXT
     ),
     [MISC] = LAYOUT_65_ansi(
-        _______, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,  KC_DEL,  KC_HOME,
-        _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, KC_PSCR, KC_SCRL, KC_PAUS, QK_BOOT, KC_PGUP,
-        KC_CAPS, RGB_SPI, RGB_SPD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          EE_CLR,  KC_PGDN,
-        KC_LSFT, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______, _______,          KC_VOLU, KC_MUTE,
-        _______, _______, _______,                            _______,          _______, _______, _______,          KC_MPRV, KC_VOLD, KC_MNXT
+        _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, EE_CLR,  RGB_TOG,
+        _______, RGB_TOG, RGB_MOD, RGB_HUI, RGB_HUD, RGB_SAI, RGB_SAD, RGB_VAI, RGB_VAD, _______, _______, _______, _______, QK_BOOT, _______,
+        _______, RGB_SPI, RGB_SPD, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______,
+        _______, _______, _______, _______, _______, _______, NK_TOGG, _______, _______, _______, _______, _______,          _______, _______,
+        _______, _______, _______,                            _______,          _______, _______, _______,          TY,      _______, TZ
     )
 };
 
