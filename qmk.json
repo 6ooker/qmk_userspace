@@ -1,7 +1,6 @@
 {
     "userspace_version": "1.1",
     "build_targets": [
-        ["padddle/rp2040", "dip"],
-        ["dztech/tofu/jr/v1", "mvterminal"]
+        ["novelkeys/nk_classic_tkl", "6ooker"]
     ]
 }
