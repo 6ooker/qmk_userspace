@@ -91,13 +91,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 [FN] = LAYOUT_tkl_ansi_tsangan( /* FN */
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______, _______, KC_MUTE,
-    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_VOLU,
-    _______, _______, _______, _______, _______, _______, _______, DE_UDIA, _______, DE_ODIA, _______, _______, _______, _______, _______, _______, KC_VOLD,
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, CM_ON  , KC_VOLU,
+    _______, _______, _______, _______, _______, _______, _______, DE_UDIA, _______, DE_ODIA, _______, _______, _______, _______, _______, CM_OFF , KC_VOLD,
     _______, DE_ADIA, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,          _______,
     _______, RM_TOGG, RM_NEXT, RM_HUED, RM_HUEU, RM_SATD, RM_SATU, RM_VALD, RM_VALU, RM_SPDD, RM_SPDU,          _______,                   _______,
     _______, _______, _______,                   RETRO_RGB,                                            _______, _______, _______, _______, _______, RM_NEXT),
 
 };
+
+// Keycombos for German Umlaut (Crossword-Puzzle-Style)
+const uint16_t PROGMEM umlaut_combo_a[] = {KC_A, KC_E, COMBO_END};
+const uint16_t PROGMEM umlaut_combo_u[] = {KC_U, KC_E, COMBO_END};
+const uint16_t PROGMEM umlaut_combo_o[] = {KC_O, KC_E, COMBO_END};
+const uint16_t PROGMEM umlaut_combo_s[] = {KC_S, DE_Z, COMBO_END};
+
+combo_t key_combos[] = {
+    COMBO(umlaut_combo_a, DE_ADIA),
+    COMBO(umlaut_combo_u, DE_UDIA),
+    COMBO(umlaut_combo_o, DE_ODIA),
+    COMBO(umlaut_combo_s, DE_SS),
+};
+
 
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (host_keyboard_led_state().caps_lock) {
